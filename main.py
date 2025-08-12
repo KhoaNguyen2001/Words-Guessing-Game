@@ -17,7 +17,11 @@ if __name__ == "__main__":
         print(f'You have {count} attempts to guess the {topic}.')
         Helper.printWord(word, lst_char)
 
-        char = input('Guess a letter: ').lower()
+        while True:
+            char = input('Guess a letter: ').lower()
+            if Helper.checkValidInput(char):
+                break
+            print('Invalid input. Please enter a single alphabetical character.')
 
         list_index = Helper.getIndexOfChar(word, char)
 

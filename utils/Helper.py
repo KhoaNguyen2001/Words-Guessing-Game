@@ -36,3 +36,7 @@ class Helper:
             else:
                 print('_', end=' ')
         print()
+
+    @staticmethod
+    def checkValidInput(char: str) -> bool:
+        return len(char) == 1 and char.isalpha()
