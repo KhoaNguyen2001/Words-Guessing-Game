@@ -1,12 +1,4 @@
-import random
-from utils import FileHandling
-
-def getWordsFromFile(file_path: str) -> list[str]:
-    fruits = FileHandling.readJsonFile(file_path)
-    return fruits if fruits is not None else []
-
-def getRandomFruit(fruits: list[str]) -> str:
-    return random.choice(fruits)
+from utils import Helper
 
 def getIndexOfChar(word: str, char: str) -> list[int]:
     return [i for i, c in enumerate(word) if c == char]
@@ -20,9 +12,9 @@ def printFruit(fruit: str, list_index: list[int]) -> None:
     print()
 
 if __name__ == "__main__":
-    words = getWordsFromFile("data/fruits.json")
-    
-    fruit = getRandomFruit(words)
+    words = Helper.getWordsFromFile("data/fruits.json")
+
+    fruit = Helper.getRandomFruit(words)
     name = input("Enter your name: ")
     print(f'Hello {name}, good luck to you!')
 
