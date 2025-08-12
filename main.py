@@ -1,5 +1,5 @@
 from config import Settings
-from utils import Helper
+from utils import Helper, IOHandling
 
 if __name__ == "__main__":
     name = input("Enter your name: ")
@@ -21,20 +21,20 @@ if __name__ == "__main__":
             char = input('Guess a letter: ').lower()
             if Helper.checkValidInput(char):
                 break
-            print('Invalid input. Please enter a single alphabetical character.')
+            IOHandling.printError('Invalid input. Please enter a single alphabetical character.')
 
         list_index = Helper.getIndexOfChar(word, char)
 
         if list_index:
-            print(f'Good job! The letter "{char}" is in the {topic}.')
+            IOHandling.printSuccess(f'Good job! The letter "{char}" is in the {topic}.')
             lst_char.extend(list_index)
         else:
-            print(f'Sorry, the letter "{char}" is not in the {topic}.')
+            IOHandling.printWarning(f'Sorry, the letter "{char}" is not in the {topic}.')
             count -= 1
 
         if set(lst_char) == set(range(len(word))):
-            print(f'Congratulations {name}! You guessed the {topic}: {word}')
+            IOHandling.printSuccess(f'Congratulations {name}! You guessed the {topic}: {word}')
             break
 
     if count == 0:
-        print(f'Sorry {name}, you ran out of attempts. The {topic} was: {word}')
+        IOHandling.printError(f'Sorry {name}, you ran out of attempts. The {topic} was: {word}')
