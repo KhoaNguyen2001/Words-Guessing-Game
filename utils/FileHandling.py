@@ -2,6 +2,7 @@
 
 import typing
 import json
+import os
 
 class FileHandling:
     """
@@ -24,3 +25,16 @@ class FileHandling:
                 return json.load(file)
         except (FileNotFoundError, json.JSONDecodeError):
             return None
+        
+    @staticmethod
+    def getTopicPath(directory: str) -> typing.List[str]:
+        """
+        Get a list of topic file paths in the specified directory.
+
+        Args:
+            directory (str): The directory to search for topic files.
+
+        Returns:
+            typing.List[str]: A list of topic file paths.
+        """
+        return [os.path.join(directory, f).replace("\\", "/") for f in os.listdir(directory) if os.path.isfile(os.path.join(directory, f))]
