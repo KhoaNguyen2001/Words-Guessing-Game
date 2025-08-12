@@ -1,13 +1,14 @@
+from config import Settings
 from utils import Helper
 
 if __name__ == "__main__":
-    words = Helper.getWordsFromFile("data/fruits.json")
+    words = Helper.getWordsFromFile(Settings.DATA_FILE_PATH)
 
     fruit = Helper.getRandomFruit(words)
     name = input("Enter your name: ")
     print(f'Hello {name}, good luck to you!')
 
-    count = 6
+    count = Settings.MAX_ATTEMPTS
     lst_char = []
     while count > 0:
         print(f'You have {count} attempts to guess the fruit.')
