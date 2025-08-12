@@ -1,3 +1,4 @@
 from .FileHandling import FileHandling
+from .Helper import Helper
 
-__all__ = ["FileHandling"]
+__all__ = ["FileHandling", "Helper"]
