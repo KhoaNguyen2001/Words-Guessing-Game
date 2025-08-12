@@ -4,13 +4,14 @@ from .FileHandling import FileHandling
 
 class Helper:
     @staticmethod
+    def getTopicFromPath(path: str) -> str:
+        return path.split("/")[-1].split(".")[0].capitalize()
+
+    @staticmethod
     def getTopicChoice(topics: list[str]) -> str:
-        def getTopicFromPath(path: str) -> str:
-            return path.split("/")[-1].split(".")[0].capitalize()
-    
         print("Choose a topic:")
         for i, topic in enumerate(topics):
-            print(f"{i + 1}. {getTopicFromPath(topic)}")
+            print(f"{i + 1}. {Helper.getTopicFromPath(topic)}")
         choice = int(input("Enter the number of your choice: ")) - 1
         return topics[choice] if 0 <= choice < len(topics) else topics[0]
 
