@@ -1,16 +1,5 @@
 from utils import Helper
 
-def getIndexOfChar(word: str, char: str) -> list[int]:
-    return [i for i, c in enumerate(word) if c == char]
-
-def printFruit(fruit: str, list_index: list[int]) -> None:
-    for i in range(len(fruit)):
-        if i in list_index:
-            print(fruit[i], end=' ')
-        else:
-            print('_', end=' ')
-    print()
-
 if __name__ == "__main__":
     words = Helper.getWordsFromFile("data/fruits.json")
 
@@ -22,11 +11,11 @@ if __name__ == "__main__":
     lst_char = []
     while count > 0:
         print(f'You have {count} attempts to guess the fruit.')
-        printFruit(fruit, lst_char)
+        Helper.printFruit(fruit, lst_char)
 
         char = input('Guess a letter: ').lower()
 
-        list_index = getIndexOfChar(fruit, char)
+        list_index = Helper.getIndexOfChar(fruit, char)
 
         if list_index:
             print(f'Good job! The letter "{char}" is in the fruit.')
