@@ -2,11 +2,13 @@ from config import Settings
 from utils import Helper
 
 if __name__ == "__main__":
-    words = Helper.getWordsFromFile(Settings.DATA_FILE_PATH)
-
-    fruit = Helper.getRandomFruit(words)
     name = input("Enter your name: ")
     print(f'Hello {name}, good luck to you!')
+
+    topic = Helper.getTopicChoice(Settings.LIST_DATA_FILE_PATH)
+    words = Helper.getWordsFromFile(topic)
+
+    fruit = Helper.getRandomFruit(words)
 
     count = Settings.MAX_ATTEMPTS
     lst_char = []
