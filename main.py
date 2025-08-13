@@ -5,7 +5,7 @@ def playGameInConsole():
     name = input("Enter your name: ")
     print(f'Hello {name}, good luck to you!')
 
-    topic = Helper.getTopicChoice(Settings.LIST_DATA_FILE_PATH)
+    topic = UserInteraction.getTopicChoice(Settings.LIST_DATA_FILE_PATH)
     words = Helper.getWordsFromFile(topic)
 
     word = Helper.getRandomWord(words)

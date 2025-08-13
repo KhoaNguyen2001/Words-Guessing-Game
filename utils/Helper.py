@@ -9,14 +9,6 @@ class Helper:
         return path.split("/")[-1].split(".")[0].capitalize()
 
     @staticmethod
-    def getTopicChoice(topics: list[str]) -> str:
-        print("Choose a topic:")
-        for i, topic in enumerate(topics):
-            print(f"{i + 1}. {Helper.getTopicFromPath(topic)}")
-        choice = int(input("Enter the number of your choice: ")) - 1
-        return topics[choice] if 0 <= choice < len(topics) else topics[0]
-
-    @staticmethod
     def getWordsFromFile(file_path: str) -> list[str]:
         fruits = FileHandling.readJsonFile(file_path)
         return fruits if fruits is not None else []

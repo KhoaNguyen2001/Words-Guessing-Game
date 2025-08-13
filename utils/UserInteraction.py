@@ -1,5 +1,6 @@
 import time
 from .IOHandling import IOHandling
+from .Helper import Helper
 
 class UserInteraction:
     @staticmethod
@@ -12,6 +13,17 @@ class UserInteraction:
             IOHandling.printError("Invalid choice. Please try again.")
             return UserInteraction.getMenuChoice(items)
         return choice
+
+    @staticmethod
+    def getTopicChoice(topics: list[str]) -> str:
+        print("Choose a topic:")
+        for i, topic in enumerate(topics):
+            print(f"{i + 1}. {Helper.getTopicFromPath(topic)}")
+        choice = int(input("Enter the number of your choice: ")) - 1
+        if choice < 0 or choice >= len(topics):
+            IOHandling.printError("Invalid choice. Please try again.")
+            return UserInteraction.getTopicChoice(topics)
+        return topics[choice]
 
     @staticmethod
     def exitGame():
