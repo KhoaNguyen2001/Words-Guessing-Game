@@ -1,4 +1,6 @@
 import time
+
+from .FileHandling import FileHandling
 from .IOHandling import IOHandling
 from .Helper import Helper
 
@@ -24,6 +26,56 @@ class UserInteraction:
             IOHandling.printError("Invalid choice. Please try again.")
             return UserInteraction.getTopicChoice(topics)
         return topics[choice]
+    
+    @staticmethod
+    def playGameInConsole(Settings):
+        name = input("Enter your name: ")
+        print(f'Hello {name}, good luck to you!')
+
+        topic = UserInteraction.getTopicChoice(Settings.LIST_DATA_FILE_PATH)
+        words = Helper.getWordsFromFile(topic)
+
+        word = Helper.getRandomWord(words)
+        topic = Helper.getTopicFromPath(topic)
+        count = Settings.MAX_ATTEMPTS
+        lst_char = []
+
+        while count > 0:
+            print(f'You have {count} attempts to guess the {topic}.')
+            Helper.printWord(word, lst_char)
+
+            while True:
+                char = input('Guess a letter: ').lower()
+                if Helper.checkValidInput(char):
+                    break
+                IOHandling.printError('Invalid input. Please enter a single alphabetical character.')
+
+            list_index = Helper.getIndexOfChar(word, char)
+
+            if list_index:
+                IOHandling.printSuccess(f'Good job! The letter "{char}" is in the {topic}.')
+                lst_char.extend(list_index)
+            else:
+                IOHandling.printWarning(f'Sorry, the letter "{char}" is not in the {topic}.')
+                count -= 1
+
+            if set(lst_char) == set(range(len(word))):
+                IOHandling.printSuccess(f'Congratulations {name}! You guessed the {topic}: {word}')
+                break
+
+        if count == 0:
+            IOHandling.printError(f'Sorry {name}, you ran out of attempts. The {topic} was: {word}')
+    
+    @staticmethod
+    def viewHighScores():
+        data = FileHandling.readJsonFile("data/storage/statistics.json")
+        high_scores = data.get("high_scores", {})
+        if high_scores:
+            print("High Scores:")
+            for name, score in high_scores.items():
+                print(f"{name}: {score}")
+        else:
+            IOHandling.printError("No high scores available.")
 
     @staticmethod
     def exitGame():
