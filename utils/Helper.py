@@ -5,6 +5,14 @@ from .FileHandling import FileHandling
 
 class Helper:
     @staticmethod
+    def updateGameStatistics(data: dict, isWin: int) -> None:
+        data["games"]["total_games"] += 1
+        if isWin:
+            data["games"]["games_won"] += 1
+        else:
+            data["games"]["games_lost"] += 1
+            
+    @staticmethod
     def getTopicFromPath(path: str) -> str:
         return path.split("/")[-1].split(".")[0].capitalize()
 

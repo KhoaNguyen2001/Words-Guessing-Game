@@ -39,6 +39,7 @@ class UserInteraction:
         topic = Helper.getTopicFromPath(topic)
         count = Settings.MAX_ATTEMPTS
         lst_char = []
+        statistics_data = FileHandling.readJsonFile(Settings.STATISTICS_FILE_PATH)
 
         while count > 0:
             print(f'You have {count} attempts to guess the {topic}.')
@@ -65,10 +66,15 @@ class UserInteraction:
 
         if count == 0:
             IOHandling.printError(f'Sorry {name}, you ran out of attempts. The {topic} was: {word}')
-    
+        
+        isWin = 1 if count > 0 else 0
+        Helper.updateGameStatistics(statistics_data, isWin)
+
+        FileHandling.writeJsonFile(Settings.STATISTICS_FILE_PATH, statistics_data)
+
     @staticmethod
-    def viewHighScores():
-        data = FileHandling.readJsonFile("data/storage/statistics.json")
+    def viewHighScores(Settings):
+        data = FileHandling.readJsonFile(Settings.STATISTICS_FILE_PATH)
         high_scores = data.get("high_scores", {})
         if high_scores:
             print("High Scores:")

@@ -27,6 +27,24 @@ class FileHandling:
             return None
         
     @staticmethod
+    def writeJsonFile(filepath: str, data: dict) -> None:
+        """
+        Writes a dictionary to a JSON file.
+
+        Args:
+            filepath (str): The path to the JSON file.
+            data (dict): The data to write to the JSON file.
+
+        Returns:
+            None
+        """
+        try:
+            with open(filepath, 'w') as file:
+                json.dump(data, file, indent=4)
+        except (FileNotFoundError, json.JSONDecodeError):
+            pass
+
+    @staticmethod
     def getTopicPath(directory: str) -> typing.List[str]:
         """
         Get a list of topic file paths in the specified directory.

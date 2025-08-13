@@ -7,6 +7,6 @@ if __name__ == "__main__":
         if choice == 0:
             UserInteraction.playGameInConsole(Settings)
         elif choice == 1:
-            UserInteraction.viewHighScores()
+            UserInteraction.viewHighScores(Settings)
         elif choice == 2:
             UserInteraction.exitGame()

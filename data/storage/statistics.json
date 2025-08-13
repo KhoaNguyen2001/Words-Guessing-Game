@@ -1,4 +1,8 @@
 {
-  "games_played": 0,
-  "high_scores": {}
+    "games": {
+        "total_games": 1,
+        "games_lost": 1,
+        "games_won": 0
+    },
+    "high_scores": {}
 }
