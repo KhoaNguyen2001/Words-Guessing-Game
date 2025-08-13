@@ -1,7 +1,7 @@
 from config import Settings
-from utils import Helper, IOHandling
+from utils import Helper, IOHandling, UserInteraction
 
-if __name__ == "__main__":
+def playGameInConsole():
     name = input("Enter your name: ")
     print(f'Hello {name}, good luck to you!')
 
@@ -38,3 +38,13 @@ if __name__ == "__main__":
 
     if count == 0:
         IOHandling.printError(f'Sorry {name}, you ran out of attempts. The {topic} was: {word}')
+
+if __name__ == "__main__":
+    while True:
+        choice = UserInteraction.getMenuChoice(Settings.MENU_ITEMS)
+        if choice == 0:
+            playGameInConsole()
+        # elif choice == 1:
+        #     UserInteraction.viewHighScores()
+        elif choice == 2:
+            UserInteraction.exitGame()
